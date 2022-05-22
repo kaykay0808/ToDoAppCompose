@@ -1,0 +1,9 @@
+Task
+(1) add dependency
+(2) Create 2 first Model classes
+    -> Create EntityClass
+    -> create a custom Enum class with all the priorities colors.
+    -> create some constants objects which contains Database table name and the database name.
+    -> add some color resources for our priorities.
+
+(3) Setup Room Database.
