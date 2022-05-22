@@ -7,3 +7,7 @@ Task
     -> add some color resources for our priorities.
 
 (3) Setup Room Database.
+    -> Create Entity table
+    -> Create DAO with our queries
+    -> Create a Database
+    -> create an Enum Class with our priorities colors.

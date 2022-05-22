@@ -1,6 +1,5 @@
 package com.kay.todoappcompose.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -9,7 +8,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.kay.todoappcompose.data.models.ToDoTask
 import kotlinx.coroutines.flow.Flow
-
 
 // https://www.w3schools.com/sql/
 
