@@ -11,3 +11,9 @@ Task
     -> Create DAO with our queries
     -> Create a Database
     -> create an Enum Class with our priorities colors.
+
+(4) Setup Dagger Hilt.
+    -> create the application class
+    -> declare name in manifest.
+
+(5) Create Repository
