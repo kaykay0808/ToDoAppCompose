@@ -2,9 +2,11 @@ package com.kay.todoappcompose.data.repository
 
 import com.kay.todoappcompose.data.ToDoDao
 import com.kay.todoappcompose.data.models.ToDoTask
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+@ViewModelScoped
 class ToDoRepository @Inject constructor(private val toDoDao: ToDoDao) {
 
     // access all functions from Dao
