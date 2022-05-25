@@ -8,11 +8,13 @@ import com.kay.todoappcompose.util.Action
 import com.kay.todoappcompose.util.Constants
 import com.kay.todoappcompose.util.Constants.TASK_SCREEN
 
+// TASK SCREEN
 fun NavGraphBuilder.taskComposable(
     navigateToListScreen: (Action) -> Unit
 ) {
     composable(
         route = TASK_SCREEN,
+        // specify what argument the screen will have
         arguments = listOf(navArgument(Constants.TASK_ARGUMENT_KEY){
             type = NavType.IntType
         })
