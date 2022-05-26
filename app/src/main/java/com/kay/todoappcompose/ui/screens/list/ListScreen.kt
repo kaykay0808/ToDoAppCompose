@@ -14,8 +14,12 @@ import com.kay.todoappcompose.R
 @Composable
 fun ListScreen(navigateToTaskScreen: (Int) -> Unit) {
     Scaffold(
-        // Creating a floatingAction button
+        // Creating the actionBar
+        topBar = {
+                 ListAppBar()
+        },
         content = {},
+        // Creating a floatingAction button
         floatingActionButton = {
             ListFloatingActionButton(onFloatingActionButtonClicked = navigateToTaskScreen)
 
