@@ -8,7 +8,6 @@ import com.kay.todoappcompose.navigation.destinations.listComposable
 import com.kay.todoappcompose.navigation.destinations.taskComposable
 import com.kay.todoappcompose.util.Constants.LIST_SCREEN
 
-
 // Settings for navigations
 @Composable
 fun SetupNavigation(
@@ -23,7 +22,7 @@ fun SetupNavigation(
     // Calling the navHost which define the navigation graph.
     NavHost(
         navController = navController,
-        startDestination =  LIST_SCREEN
+        startDestination = LIST_SCREEN
     ) {
         // Define our composable build (we will create our custom destination instead of define our composable below)
         listComposable(

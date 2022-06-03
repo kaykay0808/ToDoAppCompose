@@ -2,4 +2,9 @@
     <string name="app_name">ToDoAppCompose</string>
 
     <string name="add_button">Add Button</string>
+    <string name="delete_all_action">Delete All</string>
+    <string name="search_action">Search Task</string>
+    <string name="sort_action">Sort Tasks</string>
+    <!-- App bar Title -->
+    <string name="task">Task</string>
 </resources>

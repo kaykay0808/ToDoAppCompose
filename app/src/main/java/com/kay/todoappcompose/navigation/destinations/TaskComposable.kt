@@ -15,10 +15,12 @@ fun NavGraphBuilder.taskComposable(
     composable(
         route = TASK_SCREEN,
         // specify what argument the screen will have
-        arguments = listOf(navArgument(Constants.TASK_ARGUMENT_KEY){
-            type = NavType.IntType
-        })
-    ){
+        arguments = listOf(
+            navArgument(Constants.TASK_ARGUMENT_KEY) {
+                type = NavType.IntType
+            }
+        )
+    ) {
         // todo later
     }
 }
