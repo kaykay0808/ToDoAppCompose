@@ -41,23 +41,44 @@ import com.kay.todoappcompose.ui.theme.TOP_APP_BAR_HEIGHT
 import com.kay.todoappcompose.ui.theme.Typography
 import com.kay.todoappcompose.ui.theme.topAppBarBackgroundColor
 import com.kay.todoappcompose.ui.theme.topAppBarContentColor
+import com.kay.todoappcompose.ui.viewmodels.SharedViewModel
+import com.kay.todoappcompose.util.SearchAppBarState
 
 // Our topAppBar will have one default top app bar and a search app bar.
 
 @Composable
-fun AppBarListScreen() {
-    /*DefaultAppBarListScene(
-        // Contains 3 actions
-        onSearchClicked = {},
-        onSortClicked = {},
-        onDeleteClicked = {}
-    )*/
-    SearchAppBar(
-        text = "",
-        onTextChange = {},
-        onCloseClicked = {},
-        onSearchClicked = {}
-    )
+fun AppBarListScreen(
+    sharedViewModel: SharedViewModel,
+    searchAppBarState: SearchAppBarState,
+    searchTextState: String
+) {
+    when (searchAppBarState) {
+        SearchAppBarState.CLOSED -> {
+            DefaultAppBarListScene(
+                // Contains 3 actions
+                onSearchClicked = {
+                    // switch the searchAppBarState value to open when search icon is clicked.
+                    sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
+                },
+                onSortClicked = {},
+                onDeleteClicked = {}
+            )
+        }
+        else -> {
+            SearchAppBar(
+                text = searchTextState,
+                onTextChange = { newText ->
+                    sharedViewModel.searchTextState.value = newText
+                },
+                onCloseClicked = {
+                    sharedViewModel.searchAppBarState.value =
+                        SearchAppBarState.CLOSED
+                    sharedViewModel.searchTextState.value = "/* The text field will get empty after close is clicked */"
+                },
+                onSearchClicked = {}
+            )
+        }
+    }
 }
 
 // Defining how the default app bar should look like and placing our action icons
@@ -255,7 +276,7 @@ fun SearchAppBar(
             // the ending icon of the text field
             trailingIcon = {
                 IconButton(
-                    onClick = { onCloseClicked }
+                    onClick = { onCloseClicked() }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
