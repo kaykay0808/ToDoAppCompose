@@ -43,6 +43,7 @@ import com.kay.todoappcompose.ui.theme.topAppBarBackgroundColor
 import com.kay.todoappcompose.ui.theme.topAppBarContentColor
 import com.kay.todoappcompose.ui.viewmodels.SharedViewModel
 import com.kay.todoappcompose.util.SearchAppBarState
+import com.kay.todoappcompose.util.TrailingIconState
 
 // Our topAppBar will have one default top app bar and a search app bar.
 
@@ -73,7 +74,8 @@ fun AppBarListScreen(
                 onCloseClicked = {
                     sharedViewModel.searchAppBarState.value =
                         SearchAppBarState.CLOSED
-                    sharedViewModel.searchTextState.value = "/* The text field will get empty after close is clicked */"
+                    sharedViewModel.searchTextState.value =
+                        "" /* The text field will get empty after close is clicked */
                 },
                 onSearchClicked = {}
             )
@@ -232,6 +234,11 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
+    // Set the default state
+    var trailingIconState by remember {
+        mutableStateOf(TrailingIconState.READY_TO_DELETE)
+    }
+
     Surface(
         modifier = Modifier
             /* Takes the full width of the parent*/
@@ -276,7 +283,22 @@ fun SearchAppBar(
             // the ending icon of the text field
             trailingIcon = {
                 IconButton(
-                    onClick = { onCloseClicked() }
+                    onClick = {
+                        when (trailingIconState) {
+                            TrailingIconState.READY_TO_DELETE -> {
+                                onTextChange("")
+                                trailingIconState = TrailingIconState.READY_TO_CLOSE
+                            }
+                            TrailingIconState.READY_TO_CLOSE -> {
+                                if(text.isNotEmpty()) {
+                                    onTextChange("")
+                                } else {
+                                    onCloseClicked()
+                                    trailingIconState = TrailingIconState.READY_TO_DELETE
+                                }
+                            }
+                        }
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
