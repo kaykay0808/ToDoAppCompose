@@ -93,7 +93,7 @@ fun DefaultAppBarListScene(
     TopAppBar(
         title = {
             Text(
-                text = stringResource(id = R.string.task),
+                text = stringResource(id = R.string.list_screen_title),
                 color = MaterialTheme.colors.topAppBarContentColor
             )
         },
@@ -241,7 +241,7 @@ fun SearchAppBar(
 
     Surface(
         modifier = Modifier
-            /* Takes the full width of the parent*/
+            /* Takes the full width of the parent */
             .fillMaxWidth()
             .height(TOP_APP_BAR_HEIGHT),
         elevation = AppBarDefaults.TopAppBarElevation,
@@ -256,7 +256,7 @@ fun SearchAppBar(
                     // opacity for text field
                     modifier = Modifier
                         .alpha(ContentAlpha.medium),
-                    text = "Search",
+                    text = stringResource(id = R.string.search_placeholder),
                     color = Color.White
                 )
             },
@@ -275,7 +275,7 @@ fun SearchAppBar(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Search,
-                        contentDescription = "Search Icon",
+                        contentDescription = stringResource(id = R.string.search_icon),
                         tint = MaterialTheme.colors.topAppBarContentColor
                     )
                 }
@@ -302,7 +302,7 @@ fun SearchAppBar(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
-                        contentDescription = "Exit search bar",
+                        contentDescription = stringResource(id = R.string.close_icon),
                         tint = MaterialTheme.colors.topAppBarContentColor
                     )
                 }

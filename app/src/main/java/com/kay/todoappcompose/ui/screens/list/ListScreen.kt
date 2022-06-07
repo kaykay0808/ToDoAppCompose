@@ -33,7 +33,11 @@ fun ListScreen(
                 searchTextState = searchTextState
             )
         },
-        content = {},
+        content = {
+                  // todo: creating a list content kotlin file.
+                  // todo: define our task item composable function, which will represent one row in a list.
+                  ListContent()
+        },
         // Creating a floatingAction button
         floatingActionButton = {
             ListFloatingActionButton(onFloatingActionButtonClicked = navigateToTaskScreen)

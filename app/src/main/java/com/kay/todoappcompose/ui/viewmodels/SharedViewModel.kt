@@ -19,8 +19,9 @@ class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository
 ) : ViewModel() {
 
-    // Define 2 states which we are to observe from our list
+    // Define states which we are to observe from our list
     val searchAppBarState: MutableState<SearchAppBarState> =
+        // Set the MutableState<> to a default value below
         mutableStateOf(SearchAppBarState.CLOSED)
 
     // The value of the variable below will be used to set the text of our text field.

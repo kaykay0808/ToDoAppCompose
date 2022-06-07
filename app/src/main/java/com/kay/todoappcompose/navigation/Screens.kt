@@ -4,6 +4,7 @@ import androidx.navigation.NavHostController
 import com.kay.todoappcompose.util.Action
 import com.kay.todoappcompose.util.Constants.LIST_SCREEN
 
+// Class which handle our navigation
 class Screens(navController: NavHostController) {
     // Defined two variable screens below that represent one screen
     val list: (Action) -> Unit = { action ->

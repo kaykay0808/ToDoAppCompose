@@ -9,7 +9,7 @@ import com.kay.todoappcompose.navigation.destinations.taskComposable
 import com.kay.todoappcompose.ui.viewmodels.SharedViewModel
 import com.kay.todoappcompose.util.Constants.LIST_SCREEN
 
-// Settings for navigations
+// Settings for navigation
 @Composable
 fun SetupNavigation(
     navController: NavHostController,
