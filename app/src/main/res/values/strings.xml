@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">ToDoAppCompose</string>
 
-    <string name="close_icon">Close Icon</string>
-    <string name="search_icon">Search Icon</string>
+    <string name="empty_content">No Task Found</string>
     <string name="add_button">Add Button</string>
     <string name="delete_all_action">Delete All</string>
     <string name="search_action">Search Task</string>
@@ -10,4 +9,9 @@
     <string name="search_placeholder">Search</string>
     <!-- App bar Title -->
     <string name="list_screen_title">Task</string>
+    <!-- Icon description -->
+    <string name="close_icon">Close Icon</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="sad_face_icon">Sad Face Icon</string>
+
 </resources>

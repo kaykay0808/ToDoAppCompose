@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -30,9 +33,42 @@ import com.kay.todoappcompose.ui.theme.taskItemTextColor
 // TODO: (1) Creating a list content kotlin file.
 // TODO: (2) Define our task item composable function, which will represent one row in a list.
 
+@ExperimentalMaterialApi
 @Composable
-fun ListContent() {
+fun ListContent(
+    task: List<ToDoTask>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    if (task.isEmpty()){
+        EmptyContent()
+    } else {
+        DisplayTask(
+            task = task,
+            navigateToTaskScreen = navigateToTaskScreen
+        )
+    }
 
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun DisplayTask(
+    task: List<ToDoTask>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    LazyColumn {
+        items(
+            items = task,
+            key = { task ->
+                task.id
+            }
+        ){ task ->
+            TaskItem(
+                toDoTask = task,
+                navigateToTaskScreen = navigateToTaskScreen
+            )
+        }
+    }
 }
 
 @ExperimentalMaterialApi
@@ -73,8 +109,7 @@ fun TaskItem(
                 ) {
                     Canvas(
                         modifier = Modifier
-                            .width(PRIORITY_INDICATOR_SIZE)
-                            .height(PRIORITY_INDICATOR_SIZE),
+                            .size(PRIORITY_INDICATOR_SIZE)
                     ) {
                         drawCircle(
                             color = toDoTask.priority.color
@@ -100,8 +135,9 @@ fun TaskItem(
 fun TaskItemPreview() {
     TaskItem(
         toDoTask = ToDoTask(
-            0, "Title",
-            "What to do",
+            0,
+            "Title",
+            "Description",
             priority = Priority.MEDIUM
         ),
         navigateToTaskScreen = {}

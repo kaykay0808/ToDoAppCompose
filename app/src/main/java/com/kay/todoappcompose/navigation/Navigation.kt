@@ -1,5 +1,6 @@
 package com.kay.todoappcompose.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -10,13 +11,15 @@ import com.kay.todoappcompose.ui.viewmodels.SharedViewModel
 import com.kay.todoappcompose.util.Constants.LIST_SCREEN
 
 // Settings for navigation
+// NavHost
+@ExperimentalMaterialApi
 @Composable
 fun SetupNavigation(
     navController: NavHostController,
-    sharedViewModel: SharedViewModel /* Pass this to MainActivity under setupNavigation */
+    sharedViewModel: SharedViewModel
 ) {
     // save our backstack
-    // The variable just keep track of all our composable
+    // The variable to keep track of all our composable
     val screen = remember(navController) {
         Screens(navController = navController)
     }

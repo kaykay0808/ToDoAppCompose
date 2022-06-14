@@ -19,3 +19,7 @@ Task
 (5) Create Repository
 
 (6) Create ViewModel
+
+(7) setup navigation component with compose
+    -> setup navigation with navHost
+    -> create two navigation graph destination

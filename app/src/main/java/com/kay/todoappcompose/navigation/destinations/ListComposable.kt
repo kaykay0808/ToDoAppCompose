@@ -1,5 +1,6 @@
 package com.kay.todoappcompose.navigation.destinations
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -10,16 +11,18 @@ import com.kay.todoappcompose.util.Constants.LIST_ARGUMENT_KEY
 import com.kay.todoappcompose.util.Constants.LIST_SCREEN
 
 // extension function listComposable
-// LIST SCREEN
+// Navigation graph
+@ExperimentalMaterialApi
 fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,
     sharedViewModel: SharedViewModel
 ) {
     composable(
-        route = LIST_SCREEN,
+        route = LIST_SCREEN, // <- "list/{action}"
         // specify what argument the screen will have
         arguments = listOf(
             navArgument(LIST_ARGUMENT_KEY) {
+                // specify the argument type which will be a string
                 type = NavType.StringType
             }
         )
