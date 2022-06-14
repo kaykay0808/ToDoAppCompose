@@ -29,6 +29,7 @@ import com.kay.todoappcompose.ui.theme.PRIORITY_INDICATOR_SIZE
 import com.kay.todoappcompose.ui.theme.TASK_ITEM_ELEVATION
 import com.kay.todoappcompose.ui.theme.taskItemBackgroundColor
 import com.kay.todoappcompose.ui.theme.taskItemTextColor
+import com.kay.todoappcompose.util.RequestState
 
 // TODO: (1) Creating a list content kotlin file.
 // TODO: (2) Define our task item composable function, which will represent one row in a list.
@@ -36,18 +37,19 @@ import com.kay.todoappcompose.ui.theme.taskItemTextColor
 @ExperimentalMaterialApi
 @Composable
 fun ListContent(
-    task: List<ToDoTask>,
+    task: RequestState<List<ToDoTask>>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    if (task.isEmpty()){
-        EmptyContent()
-    } else {
-        DisplayTask(
-            task = task,
-            navigateToTaskScreen = navigateToTaskScreen
-        )
+    if(task is RequestState.Success) {
+        if (task.data.isEmpty()){
+            EmptyContent()
+        } else {
+            DisplayTask(
+                task = task.data,
+                navigateToTaskScreen = navigateToTaskScreen
+            )
+        }
     }
-
 }
 
 @OptIn(ExperimentalMaterialApi::class)

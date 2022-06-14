@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kay.todoappcompose.data.models.ToDoTask
 import com.kay.todoappcompose.data.repository.ToDoRepository
+import com.kay.todoappcompose.util.RequestState
 import com.kay.todoappcompose.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,14 +29,19 @@ class SharedViewModel @Inject constructor(
     // The value of the variable below will be used to set the text of our text field.
     val searchTextState: MutableState<String> = mutableStateOf("")
 
-    private val _allTask = MutableStateFlow<List<ToDoTask>>(emptyList())
-    val allTask: StateFlow<List<ToDoTask>> = _allTask
+    private val _allTask = MutableStateFlow<RequestState<List<ToDoTask>>>(RequestState.Idle)
+    val allTask: StateFlow<RequestState<List<ToDoTask>>> = _allTask
 
     fun getAllTask() {
-        viewModelScope.launch {
-            repository.getAllTask.collect {
-                _allTask.value = it
+        _allTask.value = RequestState.Loading
+        try {
+            viewModelScope.launch {
+                repository.getAllTask.collect {
+                    _allTask.value = RequestState.Success(it)
+                }
             }
+        } catch (e: Exception) {
+            _allTask.value = RequestState.Error(e)
         }
     }
 }
