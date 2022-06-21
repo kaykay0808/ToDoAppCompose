@@ -1,11 +1,13 @@
 package com.kay.todoappcompose.navigation.destinations
 
+import android.util.Log
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.kay.todoappcompose.util.Action
 import com.kay.todoappcompose.util.Constants
+import com.kay.todoappcompose.util.Constants.TASK_ARGUMENT_KEY
 import com.kay.todoappcompose.util.Constants.TASK_SCREEN
 
 // TASK SCREEN
@@ -20,7 +22,8 @@ fun NavGraphBuilder.taskComposable(
                 type = NavType.IntType
             }
         )
-    ) {
-        // todo later
+    ) { navBackStackEntry ->
+        val taskId = navBackStackEntry.arguments!!.getInt(TASK_ARGUMENT_KEY)
+        Log.d("TaskComposable", taskId.toString())
     }
 }
