@@ -21,11 +21,21 @@ import com.kay.todoappcompose.ui.theme.topAppBarBackgroundColor
 import com.kay.todoappcompose.ui.theme.topAppBarContentColor
 import com.kay.todoappcompose.util.Action
 
+/** -------------------TASK APP BAR---------------------------- */
 @Composable
 fun TaskAppBarScreen(
+    selectedTask: ToDoTask?,
     navigateToListScreens: (Action) -> Unit
 ) {
-    NewTaskAppBar(navigateToListScreens = navigateToListScreens)
+    // switching between bars
+    if (selectedTask == null) {
+        NewTaskAppBar(navigateToListScreens = navigateToListScreens)
+    } else {
+        ExistingTaskAppBar(
+            selectedTask = selectedTask,
+            navigateToListScreens = navigateToListScreens)
+    }
+
 }
 
 @Composable
@@ -77,6 +87,7 @@ fun AddAction(
     }
 }
 
+/** -------------------Existing APP BAR---------------------------- */
 @Composable
 fun ExistingTaskAppBar(
     selectedTask: ToDoTask,
@@ -159,7 +170,7 @@ fun ExistingTaskAppBarPreview() {
             title = "Kayashiro",
             description = "He is a beast",
             priority = Priority.HIGH
-            ),
+        ),
         navigateToListScreens = {}
     )
 }

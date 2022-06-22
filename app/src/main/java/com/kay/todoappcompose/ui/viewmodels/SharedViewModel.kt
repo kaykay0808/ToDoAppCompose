@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kay.todoappcompose.data.models.ToDoTask
 import com.kay.todoappcompose.data.repository.ToDoRepository
+import com.kay.todoappcompose.ui.screens.task.TaskAppBarScreen
 import com.kay.todoappcompose.util.RequestState
 import com.kay.todoappcompose.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,12 +15,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository
 ) : ViewModel() {
+    /** ------------------------- DATABASE -----------------------------------------*/
 
     // Define states which we are to observe from our list
     val searchAppBarState: MutableState<SearchAppBarState> =
@@ -43,5 +46,20 @@ class SharedViewModel @Inject constructor(
         } catch (e: Exception) {
             _allTask.value = RequestState.Error(e)
         }
+    }
+
+    private val _selectedTask: MutableStateFlow<ToDoTask?> =
+        MutableStateFlow(null)
+    val selectedTask: StateFlow<ToDoTask?> = _selectedTask
+
+
+    fun getSelectedTask(taskId: Int) {
+        viewModelScope.launch {
+            repository.getSelectedTask(taskId = taskId).collect { task ->
+                _selectedTask.value = task
+
+            }
+        }
+
     }
 }
