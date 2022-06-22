@@ -5,12 +5,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.kay.todoappcompose.ui.screens.task.TaskScreen
 import com.kay.todoappcompose.util.Action
 import com.kay.todoappcompose.util.Constants
 import com.kay.todoappcompose.util.Constants.TASK_ARGUMENT_KEY
 import com.kay.todoappcompose.util.Constants.TASK_SCREEN
 
-// TASK SCREEN
+// TASK SCREEN DESTINATION
 fun NavGraphBuilder.taskComposable(
     navigateToListScreen: (Action) -> Unit
 ) {
@@ -25,5 +26,7 @@ fun NavGraphBuilder.taskComposable(
     ) { navBackStackEntry ->
         val taskId = navBackStackEntry.arguments!!.getInt(TASK_ARGUMENT_KEY)
         Log.d("TaskComposable", taskId.toString())
+
+        TaskScreen(navigateToListScreens = navigateToListScreen)
     }
 }
