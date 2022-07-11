@@ -26,7 +26,13 @@ fun NavGraphBuilder.taskComposable(
                 type = NavType.IntType
             }
         )
-    ) { navBackStackEntry ->
+    ) /* Whenever we navigate from our listScreen to our taskScreen,
+    then we are going to receive a taskId, and that ID will be used to request the specific task from our database.
+    If the ID is not -1 (which is the case when we click the floating button)
+    then we will get the specific taskId and our taskScreen will recompose with the new value,
+    which we received from our selected task
+    */
+    { navBackStackEntry ->
         val taskId = navBackStackEntry.arguments!!.getInt(TASK_ARGUMENT_KEY)
         sharedViewModel.getSelectedTask(taskId = taskId)
         val selectedTask by sharedViewModel.selectedTask.collectAsState()

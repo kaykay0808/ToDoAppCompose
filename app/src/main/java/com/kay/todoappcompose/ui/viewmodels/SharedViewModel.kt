@@ -48,9 +48,15 @@ class SharedViewModel @Inject constructor(
 
     private val _selectedTask: MutableStateFlow<ToDoTask?> =
         MutableStateFlow(null)
+    /* This selectedTask variable will automatically get the value,
+    * and get observed from our task screen */
     val selectedTask: StateFlow<ToDoTask?> = _selectedTask
 
     fun getSelectedTask(taskId: Int) {
+        /* Whenever we select this get selected task function,
+        we will get the same taskId which we are passed into the function from the database,
+        and that task should be set in into _selectedTask
+        .*/
         viewModelScope.launch {
             repository.getSelectedTask(taskId = taskId).collect { task ->
                 _selectedTask.value = task
