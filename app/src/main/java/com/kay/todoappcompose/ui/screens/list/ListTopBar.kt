@@ -290,7 +290,7 @@ fun SearchAppBar(
                                 trailingIconState = TrailingIconState.READY_TO_CLOSE
                             }
                             TrailingIconState.READY_TO_CLOSE -> {
-                                if(text.isNotEmpty()) {
+                                if (text.isNotEmpty()) {
                                     onTextChange("")
                                 } else {
                                     onCloseClicked()

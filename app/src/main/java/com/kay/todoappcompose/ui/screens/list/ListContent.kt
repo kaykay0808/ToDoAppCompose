@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -40,8 +38,8 @@ fun ListContent(
     task: RequestState<List<ToDoTask>>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    if(task is RequestState.Success) {
-        if (task.data.isEmpty()){
+    if (task is RequestState.Success) {
+        if (task.data.isEmpty()) {
             EmptyContent()
         } else {
             DisplayTask(
@@ -64,7 +62,7 @@ fun DisplayTask(
             key = { task ->
                 task.id
             }
-        ){ task ->
+        ) { task ->
             TaskItem(
                 toDoTask = task,
                 navigateToTaskScreen = navigateToTaskScreen

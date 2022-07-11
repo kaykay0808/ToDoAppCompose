@@ -7,13 +7,13 @@ import com.kay.todoappcompose.data.models.ToDoTask
 import com.kay.todoappcompose.util.Action
 
 @Composable
-fun TaskScreen (
+fun TaskScreen(
     selectedTask: ToDoTask?,
     navigateToListScreens: (Action) -> Unit
 ) {
 
     Scaffold(
-        topBar =  {
+        topBar = {
             TaskAppBarScreen(
                 selectedTask = selectedTask,
                 navigateToListScreens = navigateToListScreens
@@ -26,5 +26,4 @@ fun TaskScreen (
 @Composable
 @Preview
 fun TaskScreenPreview() {
-
 }

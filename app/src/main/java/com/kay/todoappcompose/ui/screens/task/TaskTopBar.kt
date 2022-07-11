@@ -33,9 +33,9 @@ fun TaskAppBarScreen(
     } else {
         ExistingTaskAppBar(
             selectedTask = selectedTask,
-            navigateToListScreens = navigateToListScreens)
+            navigateToListScreens = navigateToListScreens
+        )
     }
-
 }
 
 @Composable
@@ -111,7 +111,6 @@ fun ExistingTaskAppBar(
         actions = {
             DeleteAction(onDeleteClicked = navigateToListScreens)
             UpdateAction(onUpdateClicked = navigateToListScreens)
-
         }
     )
 }
@@ -174,4 +173,3 @@ fun ExistingTaskAppBarPreview() {
         navigateToListScreens = {}
     )
 }
-
