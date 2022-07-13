@@ -27,3 +27,10 @@ INSERT INTO todo_table(id, title, description, priority) VALUES(2, "I am pro dev
 (7) setup navigation component with compose
     -> setup navigation with navHost
     -> create two navigation graph destination
+
+-------------------------------------
+CRUID operation
+Create
+Read
+Update
+Delete

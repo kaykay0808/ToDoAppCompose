@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kay.todoappcompose.data.models.Priority
 import com.kay.todoappcompose.data.models.ToDoTask
 import com.kay.todoappcompose.data.repository.ToDoRepository
+import com.kay.todoappcompose.util.Constants.MAX_TITLE_LENGTH
 import com.kay.todoappcompose.util.RequestState
 import com.kay.todoappcompose.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -54,6 +55,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
+    /** -------------------- Operation for reading our database -------------------------------------- */
     private val _selectedTask: MutableStateFlow<ToDoTask?> =
         MutableStateFlow(null)
 
@@ -82,12 +84,30 @@ class SharedViewModel @Inject constructor(
             title.value = selectedTask.title
             description.value = selectedTask.description
             priority.value = selectedTask.priority
-        } else {
+
             // Default values
+        } else {
             id.value = 0
             title.value = ""
             description.value = ""
             priority.value = Priority.LOW
         }
+    }
+
+    /** -------------------- Operation for updating our data ------------------------------------ */
+
+    fun updateTitle(newTitle: String) {
+        // if new title is less then max title length
+        if (newTitle.length < MAX_TITLE_LENGTH) {
+            title.value = newTitle
+        }  
+    }
+
+    /** ----------- Validation ------------- */
+
+    fun validateFields(): Boolean {
+        // if both field is NOT empty then we are going to return "true"
+        return title.value.isNotEmpty() && description.value.isNotEmpty()
+
     }
 }
