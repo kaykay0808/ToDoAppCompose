@@ -2,12 +2,10 @@ package com.kay.todoappcompose.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
@@ -31,8 +29,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kay.todoappcompose.R
 import com.kay.todoappcompose.data.models.Priority
+import com.kay.todoappcompose.ui.theme.MEDIUM_PADDING
 import com.kay.todoappcompose.ui.theme.PRIORITY_DROP_DOWN_HEIGHT
 import com.kay.todoappcompose.ui.theme.PRIORITY_INDICATOR_SIZE
+import kotlin.math.round
 
 @Composable
 fun PriorityDropDown(
@@ -50,11 +50,13 @@ fun PriorityDropDown(
     Row(
         modifier = Modifier
             .fillMaxWidth() // fill out the row with the parent.
+            .background(MaterialTheme.colors.background)
             .height(PRIORITY_DROP_DOWN_HEIGHT) // value created in Dimensions.kt
             .clickable { expanded = true } // when the row is clicked expanded value is true.
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
+                shape = MaterialTheme.shapes.small
             ),
         verticalAlignment = Alignment.CenterVertically // Vannrett/center
     ) {
@@ -85,7 +87,7 @@ fun PriorityDropDown(
         }
         DropdownMenu(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth(fraction = 0.94f),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {

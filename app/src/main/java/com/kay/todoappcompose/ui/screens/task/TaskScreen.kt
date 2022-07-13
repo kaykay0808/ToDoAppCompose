@@ -3,6 +3,7 @@ package com.kay.todoappcompose.ui.screens.task
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.kay.todoappcompose.data.models.Priority
 import com.kay.todoappcompose.data.models.ToDoTask
 import com.kay.todoappcompose.util.Action
 
@@ -19,7 +20,14 @@ fun TaskScreen(
                 navigateToListScreens = navigateToListScreens
             )
         },
-        content = {}
+        content = { TaskContent(
+            title = "",
+            onTitleChange = {},
+            description = "",
+            onDescriptionChange = {},
+            priority = Priority.LOW,
+            onPrioritySelected = {}
+        )}
     )
 }
 
