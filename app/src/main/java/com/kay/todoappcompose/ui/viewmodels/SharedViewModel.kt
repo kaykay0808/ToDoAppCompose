@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kay.todoappcompose.data.models.Priority
 import com.kay.todoappcompose.data.models.ToDoTask
 import com.kay.todoappcompose.data.repository.ToDoRepository
 import com.kay.todoappcompose.util.RequestState
@@ -21,6 +22,13 @@ class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository
 ) : ViewModel() {
     /** ------------------------- DATABASE -----------------------------------------*/
+
+    // Save some taskScreen values
+    val id: MutableState<Int> = mutableStateOf(0) // Default value for our Id will be 0
+    val title: MutableState<String> = mutableStateOf("")
+    val description: MutableState<String> = mutableStateOf("")
+    val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
+
 
     // Define states which we are to observe from our list
     val searchAppBarState: MutableState<SearchAppBarState> =
@@ -48,6 +56,7 @@ class SharedViewModel @Inject constructor(
 
     private val _selectedTask: MutableStateFlow<ToDoTask?> =
         MutableStateFlow(null)
+
     /* This selectedTask variable will automatically get the value,
     * and get observed from our task screen */
     val selectedTask: StateFlow<ToDoTask?> = _selectedTask
@@ -61,6 +70,24 @@ class SharedViewModel @Inject constructor(
             repository.getSelectedTask(taskId = taskId).collect { task ->
                 _selectedTask.value = task
             }
+        }
+    }
+
+    // Function that updating our mutableState values (Title, description, priority)
+    fun updateTaskField(selectedTask: ToDoTask?) {
+        // Check if selectedTask is null (if we have clicked on the specific task)
+        if (selectedTask != null) {
+            // set the values of each variable from our mutableState
+            id.value = selectedTask.id
+            title.value = selectedTask.title
+            description.value = selectedTask.description
+            priority.value = selectedTask.priority
+        } else {
+            // Default values
+            id.value = 0
+            title.value = ""
+            description.value = ""
+            priority.value = Priority.LOW
         }
     }
 }

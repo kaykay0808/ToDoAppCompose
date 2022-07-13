@@ -1,4 +1,8 @@
 Task
+
+How to put in query values to database:
+INSERT INTO todo_table(id, title, description, priority) VALUES(2, "I am pro developer", "I am so awesome", "MEDIUM" )
+
 (1) add dependency
 (2) Create 2 first Model classes
     -> Create EntityClass
