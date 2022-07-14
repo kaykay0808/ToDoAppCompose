@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.kay.todoappcompose.data.models.Priority
 import com.kay.todoappcompose.data.models.ToDoTask
 import com.kay.todoappcompose.data.repository.ToDoRepository
+import com.kay.todoappcompose.util.Action
 import com.kay.todoappcompose.util.Constants.MAX_TITLE_LENGTH
 import com.kay.todoappcompose.util.RequestState
 import com.kay.todoappcompose.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -23,6 +25,9 @@ class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository
 ) : ViewModel() {
     /** ------------------------- DATABASE -----------------------------------------*/
+
+    val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
+
 
     // Save some taskScreen values
     val id: MutableState<Int> = mutableStateOf(0) // Default value for our Id will be 0
@@ -55,7 +60,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    /** -------------------- Operation for reading our database -------------------------------------- */
+    /** -------------------- Operations for reading our database -------------------------------------- */
     private val _selectedTask: MutableStateFlow<ToDoTask?> =
         MutableStateFlow(null)
 
@@ -102,6 +107,18 @@ class SharedViewModel @Inject constructor(
             title.value = newTitle
         }  
     }
+    /** ----------------------Adding Data------------------------*/
+    private fun addTask() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val toDoTask = ToDoTask(
+                title = title.value,
+                description = description.value,
+                priority = priority.value
+            )
+            repository.addTask(toDoTask = toDoTask)
+        }
+    }
+
 
     /** ----------- Validation ------------- */
 
@@ -109,5 +126,31 @@ class SharedViewModel @Inject constructor(
         // if both field is NOT empty then we are going to return "true"
         return title.value.isNotEmpty() && description.value.isNotEmpty()
 
+    }
+
+    /** ------------------ ACTIONS -------------------*/
+
+    fun handleDatabaseActions(action: Action) {
+        when (action) {
+            Action.ADD -> {
+                addTask()
+            }
+            Action.UPDATE -> {
+                // todo: creating an update function
+            }
+            Action.DELETE -> {
+                // todo: creating a delete function
+            }
+            Action.DELETE_ALL -> {
+                // todo: Creating a delete all function
+            }
+            Action.UNDO -> {
+                // todo: Creating an undo function
+            }
+            else -> {
+
+            }
+        }
+        this.action.value = Action.NO_ACTION
     }
 }

@@ -29,6 +29,25 @@ INSERT INTO todo_table(id, title, description, priority) VALUES(2, "I am pro dev
     -> create two navigation graph destination
 
 -------------------------------------
+Task
+CRUID OPERATIONS
+
+ADD TASK ->
+(Some setup before adding values to our database)
+
+(1) Change Lambda in ListComposable (navBackStackEntry)
+(2) In Action Enum class. Create a extension function which will convert a sting to the enumClass action
+    -> this function will be on an extension nullable string and return action (fun String.?toAction (): Action)
+    -> use a return when statement, and when this (String) is equal to the specific enum class "name" then return Action.name
+    -> else block should be NO_ACTION
+(3) Create a val action which should be our navBackStackEntry and calls arguments? which call the getString() function with the LIST_ARGUMENT_KEY passed in.
+    -> this should call the function toAction which we just create in enum class.
+    -> check this this with Log.d("ListComposable", action.name)
+
+
+
+
+-------------------------------------
 CRUID operation
 Create
 Read

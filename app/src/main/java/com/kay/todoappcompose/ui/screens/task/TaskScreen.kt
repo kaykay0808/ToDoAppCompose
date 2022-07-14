@@ -58,13 +58,11 @@ fun TaskScreen(
 fun displayToast(context: Context) {
     Toast.makeText(
         context,
-        "Text Fields is Empty",
+        "Text Fields Empty",
         Toast.LENGTH_SHORT
     ).show()
 }
 
 @Composable
 @Preview
-fun TaskScreenPreview() {
-
-}
+fun TaskScreenPreview() {}

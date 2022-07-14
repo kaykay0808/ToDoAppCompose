@@ -38,6 +38,7 @@ fun NavGraphBuilder.taskComposable(
         sharedViewModel.getSelectedTask(taskId = taskId)
         val selectedTask by sharedViewModel.selectedTask.collectAsState()
         
+        // (Note: Changed taskId to selected task cause collectAsState sometimes run after launchedEffect)
         LaunchedEffect(key1 = selectedTask) {
             sharedViewModel.updateTaskField(selectedTask = selectedTask) 
         }

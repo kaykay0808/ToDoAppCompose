@@ -11,6 +11,27 @@ enum class Action {
     NO_ACTION
 }
 
+// Taking a string and returning an enum entry
 fun String?.toAction(): Action {
-    return if (this.isNullOrEmpty()) Action.NO_ACTION else Action.valueOf(this)
+    // return if (this.isNullOrEmpty()) Action.NO_ACTION else Action.valueOf(this)
+    return when {
+        this == "ADD" -> {
+            Action.ADD
+        }
+        this == "UPDATE" -> {
+            Action.UPDATE
+        }
+        this == "DELETE" -> {
+            Action.DELETE
+        }
+        this == "DELETE_ALL" -> {
+            Action.DELETE_ALL
+        }
+        this == "UNDO" -> {
+            Action.UNDO
+        }
+        else -> {
+            Action.NO_ACTION
+        }
+    }
 }

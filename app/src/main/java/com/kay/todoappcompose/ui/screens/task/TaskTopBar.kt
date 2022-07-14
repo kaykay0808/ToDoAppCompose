@@ -166,7 +166,7 @@ fun ExistingTaskAppBarPreview() {
     ExistingTaskAppBar(
         selectedTask = ToDoTask(
             id = 0,
-            title = "Kayashiro",
+            title = "Existing task",
             description = "He is a beast",
             priority = Priority.HIGH
         ),
