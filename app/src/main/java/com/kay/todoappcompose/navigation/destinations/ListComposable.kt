@@ -3,7 +3,6 @@ package com.kay.todoappcompose.navigation.destinations
 import android.util.Log
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.LaunchedEffect
-import androidx.navigation.NavArgumentBuilder
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -37,7 +36,7 @@ fun NavGraphBuilder.listComposable(
         val action = navBackStackEntry.arguments?.getString(LIST_ARGUMENT_KEY).toAction()
         Log.d("ListComposable", action.name)
 
-        LaunchedEffect(key1 = action){
+        LaunchedEffect(key1 = action) {
             sharedViewModel.action.value = action
         }
 

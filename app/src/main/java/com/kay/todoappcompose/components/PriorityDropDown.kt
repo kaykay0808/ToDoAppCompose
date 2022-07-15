@@ -29,10 +29,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kay.todoappcompose.R
 import com.kay.todoappcompose.data.models.Priority
-import com.kay.todoappcompose.ui.theme.MEDIUM_PADDING
 import com.kay.todoappcompose.ui.theme.PRIORITY_DROP_DOWN_HEIGHT
 import com.kay.todoappcompose.ui.theme.PRIORITY_INDICATOR_SIZE
-import kotlin.math.round
 
 @Composable
 fun PriorityDropDown(

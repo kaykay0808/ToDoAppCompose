@@ -28,13 +28,11 @@ class SharedViewModel @Inject constructor(
 
     val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
 
-
     // Save some taskScreen values
     val id: MutableState<Int> = mutableStateOf(0) // Default value for our Id will be 0
     val title: MutableState<String> = mutableStateOf("")
     val description: MutableState<String> = mutableStateOf("")
     val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
-
 
     // Define states which we are to observe from our list
     val searchAppBarState: MutableState<SearchAppBarState> =
@@ -105,9 +103,10 @@ class SharedViewModel @Inject constructor(
         // if new title is less then max title length
         if (newTitle.length < MAX_TITLE_LENGTH) {
             title.value = newTitle
-        }  
+        }
     }
-    /** ----------------------Adding Data------------------------*/
+
+    /**----------------------Adding Data------------------------*/
     private fun addTask() {
         viewModelScope.launch(Dispatchers.IO) {
             val toDoTask = ToDoTask(
@@ -119,13 +118,11 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-
     /** ----------- Validation ------------- */
 
     fun validateFields(): Boolean {
         // if both field is NOT empty then we are going to return "true"
         return title.value.isNotEmpty() && description.value.isNotEmpty()
-
     }
 
     /** ------------------ ACTIONS -------------------*/
@@ -147,9 +144,7 @@ class SharedViewModel @Inject constructor(
             Action.UNDO -> {
                 // todo: Creating an undo function
             }
-            else -> {
-
-            }
+            else -> {}
         }
         this.action.value = Action.NO_ACTION
     }
