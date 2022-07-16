@@ -28,6 +28,7 @@ fun ListScreen(
     val action by sharedViewModel.action
 
     val allTask by sharedViewModel.allTask.collectAsState()
+    val searchedTask by sharedViewModel.searchedTask.collectAsState()
     
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
@@ -59,7 +60,9 @@ fun ListScreen(
             // todo: creating a list content kotlin file.
             // todo: define our task item composable function, which will represent one row in a list.
             ListContent(
-                task = allTask,
+                allTask = allTask,
+                searchedTask = searchedTask,
+                searchAppBarState = searchAppBarState,
                 navigateToTaskScreen = navigateToTaskScreen
             )
         },

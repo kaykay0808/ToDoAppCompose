@@ -28,6 +28,7 @@ import com.kay.todoappcompose.ui.theme.TASK_ITEM_ELEVATION
 import com.kay.todoappcompose.ui.theme.taskItemBackgroundColor
 import com.kay.todoappcompose.ui.theme.taskItemTextColor
 import com.kay.todoappcompose.util.RequestState
+import com.kay.todoappcompose.util.SearchAppBarState
 
 // TODO: (1) Creating a list content kotlin file.
 // TODO: (2) Define our task item composable function, which will represent one row in a list.
@@ -35,18 +36,42 @@ import com.kay.todoappcompose.util.RequestState
 @ExperimentalMaterialApi
 @Composable
 fun ListContent(
-    task: RequestState<List<ToDoTask>>,
+    allTask: RequestState<List<ToDoTask>>,
+    searchedTask: RequestState<List<ToDoTask>>,
+    searchAppBarState: SearchAppBarState,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    if (task is RequestState.Success) {
-        if (task.data.isEmpty()) {
-            EmptyContent()
-        } else {
-            DisplayTask(
-                task = task.data,
+    // If we clicked on the search symbol in the keyboard
+    if (searchAppBarState == SearchAppBarState.TRIGGERED) {
+        if (searchedTask is RequestState.Success) {
+            HandleListContent(
+                task = searchedTask.data,
                 navigateToTaskScreen = navigateToTaskScreen
             )
         }
+    } else {
+        if(allTask is RequestState.Success){
+            HandleListContent(
+                task = allTask.data,
+                navigateToTaskScreen = navigateToTaskScreen
+            )
+        }
+    }
+}
+
+@ExperimentalMaterialApi
+@Composable
+fun HandleListContent(
+    task: List<ToDoTask>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    if (task.isEmpty()) {
+        EmptyContent()
+    } else {
+        DisplayTask(
+            task = task,
+            navigateToTaskScreen = navigateToTaskScreen
+        )
     }
 }
 

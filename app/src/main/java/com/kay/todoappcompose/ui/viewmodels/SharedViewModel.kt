@@ -43,8 +43,27 @@ class SharedViewModel @Inject constructor(
     // The value of the variable below will be used to set the text of our text field.
     val searchTextState: MutableState<String> = mutableStateOf("")
 
+    private val _searchedTask = MutableStateFlow<RequestState<List<ToDoTask>>>(RequestState.Idle)
+    val searchedTask: StateFlow<RequestState<List<ToDoTask>>> = _searchedTask
+
     private val _allTask = MutableStateFlow<RequestState<List<ToDoTask>>>(RequestState.Idle)
     val allTask: StateFlow<RequestState<List<ToDoTask>>> = _allTask
+
+    fun searchDatabase(searchQuery: String) {
+        _searchedTask.value = RequestState.Loading
+        try {
+            viewModelScope.launch {
+                repository.searchDatabase(searchQuery = "%$searchQuery%")
+                    .collect { searchTask ->
+                        _searchedTask.value = RequestState.Success(searchTask)
+                    }
+            }
+        } catch (e: Exception) {
+            _searchedTask.value = RequestState.Error(e)
+        }
+        // Update searchAppBarState variable
+        searchAppBarState.value = SearchAppBarState.TRIGGERED
+    }
 
     fun getAllTask() {
         _allTask.value = RequestState.Loading
@@ -84,7 +103,6 @@ class SharedViewModel @Inject constructor(
         // Check if selectedTask is null (if we have clicked on the specific task)
         if (selectedTask != null) {
             // set the values of each variable from our mutableState
-            Log.d("updateTaskFields", selectedTask.toString())
             id.value = selectedTask.id
             title.value = selectedTask.title
             description.value = selectedTask.description
@@ -118,6 +136,8 @@ class SharedViewModel @Inject constructor(
             )
             repository.addTask(toDoTask = toDoTask)
         }
+        // change the searchAppBarState to closed when adding a new item
+        searchAppBarState.value = SearchAppBarState.CLOSED
     }
     /** ------------ Deleting single task ------------------- */
     private fun deleteSingleTask() {

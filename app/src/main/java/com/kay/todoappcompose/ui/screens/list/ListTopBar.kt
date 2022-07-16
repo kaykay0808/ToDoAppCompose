@@ -77,7 +77,9 @@ fun AppBarListScreen(
                     sharedViewModel.searchTextState.value =
                         "" /* The text field will get empty after close is clicked */
                 },
-                onSearchClicked = {}
+                onSearchClicked = {
+                    sharedViewModel.searchDatabase(searchQuery = it)
+                }
             )
         }
     }
