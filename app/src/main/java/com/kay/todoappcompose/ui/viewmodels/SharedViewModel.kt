@@ -1,5 +1,6 @@
 package com.kay.todoappcompose.ui.viewmodels
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -83,6 +84,7 @@ class SharedViewModel @Inject constructor(
         // Check if selectedTask is null (if we have clicked on the specific task)
         if (selectedTask != null) {
             // set the values of each variable from our mutableState
+            Log.d("updateTaskFields", selectedTask.toString())
             id.value = selectedTask.id
             title.value = selectedTask.title
             description.value = selectedTask.description
@@ -106,7 +108,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    /**----------------------Adding Data------------------------*/
+    /** ----------------------Adding Data------------------------ */
     private fun addTask() {
         viewModelScope.launch(Dispatchers.IO) {
             val toDoTask = ToDoTask(
@@ -117,15 +119,39 @@ class SharedViewModel @Inject constructor(
             repository.addTask(toDoTask = toDoTask)
         }
     }
+    /** ------------ Deleting single task ------------------- */
+    private fun deleteSingleTask() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val deleteSingleTask = ToDoTask(
+                id = id.value,
+                title = title.value,
+                description = description.value,
+                priority = priority.value
+            )
+            repository.deleteTask(toDoTask = deleteSingleTask)
+        }
+    }
+    /** ------------------ Updating --------------------------*/
+    private fun updateTask(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val updateTask = ToDoTask(
+                id = id.value,
+                title = title.value,
+                description = description.value,
+                priority = priority.value
+            )
+            repository.updateTask(toDoTask = updateTask)
+        }
+    }
 
-    /** ----------- Validation ------------- */
+    /** ----------------- Validation ------------------- */
 
     fun validateFields(): Boolean {
         // if both field is NOT empty then we are going to return "true"
         return title.value.isNotEmpty() && description.value.isNotEmpty()
     }
 
-    /** ------------------ ACTIONS -------------------*/
+    /** ------------------- ACTIONS --------------------*/
 
     fun handleDatabaseActions(action: Action) {
         when (action) {
@@ -133,16 +159,16 @@ class SharedViewModel @Inject constructor(
                 addTask()
             }
             Action.UPDATE -> {
-                // todo: creating an update function
+                updateTask()
             }
             Action.DELETE -> {
-                // todo: creating a delete function
+                deleteSingleTask()
             }
             Action.DELETE_ALL -> {
                 // todo: Creating a delete all function
             }
             Action.UNDO -> {
-                // todo: Creating an undo function
+                addTask()
             }
             else -> {}
         }

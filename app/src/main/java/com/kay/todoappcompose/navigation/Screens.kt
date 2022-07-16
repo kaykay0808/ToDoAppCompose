@@ -7,8 +7,8 @@ import com.kay.todoappcompose.util.Constants.LIST_SCREEN
 // Class which handle our navigation
 // This screen class should contains navController
 class Screens(navController: NavHostController) {
-    // Defined two variable screens below that represent one screen
 
+    // Defined two variable screens below that represent one screen
     // 1
     val list: (Action) -> Unit = { action ->
         // make our Enum action to navigate

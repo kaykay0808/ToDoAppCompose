@@ -5,7 +5,7 @@ object Constants {
     const val DATABASE_TABLE = "todo_table"
     const val DATABASE_NAME = "todo_database"
 
-    // This is the argument of our destination instead of hardcoding.
+    // Argument of our destination instead of hardcoding.
     const val LIST_SCREEN = "list/{action}"
     const val TASK_SCREEN = "task/{taskId}"
 
