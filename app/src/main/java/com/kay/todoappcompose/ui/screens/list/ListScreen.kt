@@ -1,6 +1,5 @@
 package com.kay.todoappcompose.ui.screens.list
 
-import android.util.Log
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -29,7 +28,7 @@ fun ListScreen(
 
     val allTask by sharedViewModel.allTask.collectAsState()
     val searchedTask by sharedViewModel.searchedTask.collectAsState()
-    
+
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
 
@@ -108,7 +107,7 @@ fun DisplaySnackBar(
         if (action != Action.NO_ACTION) {
             scope.launch {
                 val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
-                    message = "${action.name} : $taskTitle",
+                    message = setMessage(action = action, taskTitle = taskTitle),
                     actionLabel = setActionLabel(action = action)
                 )
                 undoDeletedTask(
@@ -117,6 +116,15 @@ fun DisplaySnackBar(
                     onUndoClicked = onUndoClicked
                 )
             }
+        }
+    }
+}
+
+private fun setMessage(action: Action, taskTitle: String): String {
+    return when (action) {
+        Action.DELETE_ALL -> "All Task Removed."
+        else -> {
+            "${action.name} : $taskTitle"
         }
     }
 }
@@ -138,4 +146,3 @@ private fun undoDeletedTask(
         onUndoClicked(Action.UNDO)
     }
 }
-

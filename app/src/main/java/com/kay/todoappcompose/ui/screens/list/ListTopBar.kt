@@ -42,6 +42,7 @@ import com.kay.todoappcompose.ui.theme.Typography
 import com.kay.todoappcompose.ui.theme.topAppBarBackgroundColor
 import com.kay.todoappcompose.ui.theme.topAppBarContentColor
 import com.kay.todoappcompose.ui.viewmodels.SharedViewModel
+import com.kay.todoappcompose.util.Action
 import com.kay.todoappcompose.util.SearchAppBarState
 import com.kay.todoappcompose.util.TrailingIconState
 
@@ -62,7 +63,7 @@ fun AppBarListScreen(
                     sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
                 },
                 onSortClicked = {},
-                onDeleteClicked = {}
+                onDeleteAllClicked = { sharedViewModel.action.value = Action.DELETE_ALL }
             )
         }
         else -> {
@@ -90,7 +91,7 @@ fun AppBarListScreen(
 fun DefaultAppBarListScene(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit
 ) {
     TopAppBar(
         title = {
@@ -103,7 +104,7 @@ fun DefaultAppBarListScene(
             ListAppBarActions(
                 onSearchClicked = onSearchClicked,
                 onSortClicked = onSortClicked,
-                onDeleteClicked = onDeleteClicked
+                onDeleteAllClicked = onDeleteAllClicked
             )
         },
         backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor
@@ -114,12 +115,12 @@ fun DefaultAppBarListScene(
 fun ListAppBarActions(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit
 ) {
     // Calling our 3 action functions which we Define in our 3 different functions
     SearchAction(onSearchClicked = onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
-    DeleteAllAction(onDeleteClicked = onDeleteClicked)
+    DeleteAllAction(onDeleteAllClicked = onDeleteAllClicked)
 }
 
 // action 1
@@ -197,11 +198,14 @@ fun SortAction(
 
 // action 3
 @Composable
-fun DeleteAllAction(onDeleteClicked: () -> Unit) {
+fun DeleteAllAction(onDeleteAllClicked: () -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
     IconButton(
-        onClick = { expanded = true }
+        onClick = {
+            expanded = true
+            onDeleteAllClicked()
+        }
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_vertival_menu),
@@ -215,7 +219,7 @@ fun DeleteAllAction(onDeleteClicked: () -> Unit) {
             DropdownMenuItem(
                 onClick = {
                     expanded = false
-                    onDeleteClicked()
+                    onDeleteAllClicked()
                 }
             ) {
                 Text(
@@ -328,7 +332,7 @@ fun DefaultAppBarPreview() {
     DefaultAppBarListScene(
         onSearchClicked = {},
         onSortClicked = {},
-        onDeleteClicked = {}
+        onDeleteAllClicked = {}
     )
 }
 

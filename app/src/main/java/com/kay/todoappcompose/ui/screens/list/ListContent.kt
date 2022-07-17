@@ -50,7 +50,7 @@ fun ListContent(
             )
         }
     } else {
-        if(allTask is RequestState.Success){
+        if (allTask is RequestState.Success) {
             HandleListContent(
                 task = allTask.data,
                 navigateToTaskScreen = navigateToTaskScreen

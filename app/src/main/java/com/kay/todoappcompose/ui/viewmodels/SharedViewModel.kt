@@ -1,6 +1,5 @@
 package com.kay.todoappcompose.ui.viewmodels
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -16,7 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -139,6 +137,7 @@ class SharedViewModel @Inject constructor(
         // change the searchAppBarState to closed when adding a new item
         searchAppBarState.value = SearchAppBarState.CLOSED
     }
+
     /** ------------ Deleting single task ------------------- */
     private fun deleteSingleTask() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -151,8 +150,16 @@ class SharedViewModel @Inject constructor(
             repository.deleteTask(toDoTask = deleteSingleTask)
         }
     }
+
+    // Deleting All Task =====================
+    private fun deleteAllTask() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllTask()
+        }
+    }
+
     /** ------------------ Updating --------------------------*/
-    private fun updateTask(){
+    private fun updateTask() {
         viewModelScope.launch(Dispatchers.IO) {
             val updateTask = ToDoTask(
                 id = id.value,
@@ -185,7 +192,7 @@ class SharedViewModel @Inject constructor(
                 deleteSingleTask()
             }
             Action.DELETE_ALL -> {
-                // todo: Creating a delete all function
+                deleteAllTask()
             }
             Action.UNDO -> {
                 addTask()
