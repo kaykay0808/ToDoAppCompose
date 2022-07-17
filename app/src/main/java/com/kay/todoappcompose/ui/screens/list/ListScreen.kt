@@ -49,7 +49,7 @@ fun ListScreen(
         scaffoldState = scaffoldState,
         // Creating the actionBar
         topBar = {
-            AppBarListScreen(
+            ListTopBar(
                 sharedViewModel = sharedViewModel,
                 searchAppBarState = searchAppBarState,
                 searchTextState = searchTextState

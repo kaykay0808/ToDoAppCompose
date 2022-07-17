@@ -27,7 +27,7 @@ fun TaskScreen(
 
     Scaffold(
         topBar = {
-            TaskAppBarScreen(
+            TaskTopBar(
                 selectedTask = selectedTask,
                 navigateToListScreens = { action ->
                     if (action == Action.NO_ACTION) {

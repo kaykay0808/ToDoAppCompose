@@ -49,7 +49,7 @@ import com.kay.todoappcompose.util.TrailingIconState
 // Our topAppBar will have one default top app bar and a search app bar.
 
 @Composable
-fun AppBarListScreen(
+fun ListTopBar(
     sharedViewModel: SharedViewModel,
     searchAppBarState: SearchAppBarState,
     searchTextState: String

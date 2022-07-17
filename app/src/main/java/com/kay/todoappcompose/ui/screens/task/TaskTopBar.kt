@@ -23,7 +23,7 @@ import com.kay.todoappcompose.util.Action
 
 /** -------------------TASK APP BAR---------------------------- */
 @Composable
-fun TaskAppBarScreen(
+fun TaskTopBar(
     selectedTask: ToDoTask?,
     navigateToListScreens: (Action) -> Unit
 ) {

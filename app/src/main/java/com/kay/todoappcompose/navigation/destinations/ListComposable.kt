@@ -34,7 +34,6 @@ fun NavGraphBuilder.listComposable(
         // This argument will be received from our TaskComposable in a format of a string
         // We want to convert the data string back to the original type which is action.
         val action = navBackStackEntry.arguments?.getString(LIST_ARGUMENT_KEY).toAction()
-        Log.d("ListComposable", action.name)
 
         LaunchedEffect(key1 = action) {
             sharedViewModel.action.value = action

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">ToDoAppCompose</string>
 
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
     <string name="empty_content">No Task Found</string>
     <string name="add_button">Add Button</string>
     <string name="delete_all_action">Delete All</string>
