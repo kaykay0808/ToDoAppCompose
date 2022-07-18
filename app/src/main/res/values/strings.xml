@@ -27,6 +27,8 @@
 
     <string name="delete_task">Remove \'%1$s\'?</string>
     <string name="delete_task_confirmation">Are you duckings sure you want to remove \'%1$s\'?</string>
+    <string name="delete_all_task">Remove All Task?</string>
+    <string name="delete_all_task_confirmation">Are you sure you want to\nremove all task?\nThere is no way going back after this action.</string>
 
 
 </resources>
