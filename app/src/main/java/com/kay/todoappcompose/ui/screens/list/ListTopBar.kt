@@ -125,7 +125,7 @@ fun ListAppBarActions(
         message = stringResource(id = R.string.delete_all_task_confirmation),
         openDialog = openDialog,
         closeDialog = { openDialog = false },
-        onYesClicked = {Action.DELETE_ALL}
+        onYesClicked = { onDeleteAllConfirmed() }
     )
 
     // Calling our 3 action functions which we Define in our 3 different functions

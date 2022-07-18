@@ -9,8 +9,10 @@
     <string name="search_action">Search Task</string>
     <string name="sort_action">Sort Tasks</string>
     <string name="search_placeholder">Search</string>
-    <!-- App bar Title -->
-    <string name="list_screen_title">Task</string>
+    <!-- Top bar Title -->
+    <string name="list_screen_title">List Of Task</string>
+    <string name="new_task_screen_title">Add New Task</string>
+
     <!-- Icon description -->
     <string name="close_icon">Close Icon</string>
     <string name="search_icon">Search Icon</string>
@@ -25,10 +27,11 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
 
+    <!-- Task Top Bar Actions -->
     <string name="delete_task">Remove \'%1$s\'?</string>
     <string name="delete_task_confirmation">Are you duckings sure you want to remove \'%1$s\'?</string>
+
+    <!-- List Top Bar Actions -->
     <string name="delete_all_task">Remove All Task?</string>
     <string name="delete_all_task_confirmation">Are you sure you want to\nremove all task?\nThere is no way going back after this action.</string>
-
-
 </resources>

@@ -28,19 +28,22 @@ fun TaskTopBar(
     selectedTask: ToDoTask?,
     navigateToListScreens: (Action) -> Unit
 ) {
-    // switching between bars
+    // switching between newTaskTopBar and existingTopBar
     if (selectedTask == null) {
-        NewTaskAppBar(navigateToListScreens = navigateToListScreens)
+        NewTaskTopBar(
+            navigateToListScreens = navigateToListScreens
+        )
     } else {
-        ExistingTaskAppBar(
+        ExistingTaskTopBar(
             selectedTask = selectedTask,
             navigateToListScreens = navigateToListScreens
         )
     }
 }
 
+// When floating button is clicked NewTaskBar will display
 @Composable
-fun NewTaskAppBar(
+fun NewTaskTopBar(
     navigateToListScreens: (Action) -> Unit,
 ) {
     // Designing the surface/topBar
@@ -51,7 +54,7 @@ fun NewTaskAppBar(
         },
         title = {
             Text(
-                text = stringResource(id = R.string.add_task),
+                text = stringResource(id = R.string.new_task_screen_title),
                 color = MaterialTheme.colors.topAppBarContentColor
             )
         },
@@ -89,8 +92,9 @@ fun AddAction(
 }
 
 /** -------------------Existing APP BAR---------------------------- */
+
 @Composable
-fun ExistingTaskAppBar(
+fun ExistingTaskTopBar(
     selectedTask: ToDoTask,
     navigateToListScreens: (Action) -> Unit,
 ) {
@@ -117,6 +121,7 @@ fun ExistingTaskAppBar(
     )
 }
 
+// Actions for our ExistingTaskTopBar
 @Composable
 fun CloseAction(
     onCloseClicked: (Action) -> Unit
@@ -137,6 +142,10 @@ fun ExistingTaskAppBarActions(
 ) {
     var openDialog by remember { mutableStateOf(false) }
 
+    DeleteAction(onDeleteClicked = {
+        openDialog = true
+    })
+
     DisplayAlertDialog(
         title = stringResource(
             id = R.string.delete_task,
@@ -151,9 +160,6 @@ fun ExistingTaskAppBarActions(
         onYesClicked = { navigateToListScreens(Action.DELETE) }
     )
 
-    DeleteAction(onDeleteClicked = {
-        openDialog = true
-    })
     UpdateAction(onUpdateClicked = navigateToListScreens)
 
 }
@@ -187,13 +193,13 @@ fun UpdateAction(
 @Composable
 @Preview
 fun NewTaskAppBarPreview() {
-    NewTaskAppBar(navigateToListScreens = {})
+    NewTaskTopBar(navigateToListScreens = {})
 }
 
 @Composable
 @Preview
 fun ExistingTaskAppBarPreview() {
-    ExistingTaskAppBar(
+    ExistingTaskTopBar(
         selectedTask = ToDoTask(
             id = 0,
             title = "Existing task",
