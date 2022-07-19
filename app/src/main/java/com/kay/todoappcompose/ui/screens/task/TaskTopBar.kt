@@ -116,7 +116,8 @@ fun ExistingTaskTopBar(
         actions = {
             ExistingTaskAppBarActions(
                 selectedTask = selectedTask,
-                navigateToListScreens = navigateToListScreens)
+                navigateToListScreens = navigateToListScreens
+            )
         }
     )
 }
@@ -161,7 +162,6 @@ fun ExistingTaskAppBarActions(
     )
 
     UpdateAction(onUpdateClicked = navigateToListScreens)
-
 }
 
 @Composable

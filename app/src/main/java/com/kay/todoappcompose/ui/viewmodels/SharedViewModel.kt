@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kay.todoappcompose.data.models.Priority
 import com.kay.todoappcompose.data.models.ToDoTask
+import com.kay.todoappcompose.data.repository.DataStoreRepository
 import com.kay.todoappcompose.data.repository.ToDoRepository
 import com.kay.todoappcompose.util.Action
 import com.kay.todoappcompose.util.Constants.MAX_TITLE_LENGTH
@@ -21,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private val repository: ToDoRepository
+    private val repository: ToDoRepository,
+    private val dataStoreRepository: DataStoreRepository /*( ← Inject DataStore Repository )*/
 ) : ViewModel() {
     /** ------------------------- DATABASE -----------------------------------------*/
 
