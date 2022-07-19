@@ -38,23 +38,42 @@ import com.kay.todoappcompose.util.SearchAppBarState
 fun ListContent(
     allTask: RequestState<List<ToDoTask>>,
     searchedTask: RequestState<List<ToDoTask>>,
+    lowPriorityTasks: List<ToDoTask>,
+    highPriorityTasks: List<ToDoTask>,
+    sortState: RequestState<Priority>,
     searchAppBarState: SearchAppBarState,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    // If we clicked on the search symbol in the keyboard
-    if (searchAppBarState == SearchAppBarState.TRIGGERED) {
-        if (searchedTask is RequestState.Success) {
-            HandleListContent(
-                task = searchedTask.data,
-                navigateToTaskScreen = navigateToTaskScreen
-            )
-        }
-    } else {
-        if (allTask is RequestState.Success) {
-            HandleListContent(
-                task = allTask.data,
-                navigateToTaskScreen = navigateToTaskScreen
-            )
+    if (sortState is RequestState.Success) {
+        when {
+            searchAppBarState == SearchAppBarState.TRIGGERED -> {
+                if (searchedTask is RequestState.Success) {
+                    HandleListContent(
+                        task = searchedTask.data,
+                        navigateToTaskScreen = navigateToTaskScreen
+                    )
+                }
+            }
+            sortState.data == Priority.NONE -> {
+                if (allTask is RequestState.Success) {
+                    HandleListContent(
+                        task = allTask.data,
+                        navigateToTaskScreen = navigateToTaskScreen
+                    )
+                }
+            }
+            sortState.data == Priority.LOW -> {
+                HandleListContent(
+                    task = lowPriorityTasks,
+                    navigateToTaskScreen = navigateToTaskScreen
+                )
+            }
+            sortState.data == Priority.HIGH -> {
+                HandleListContent(
+                    task = highPriorityTasks,
+                    navigateToTaskScreen = navigateToTaskScreen
+                )
+            }
         }
     }
 }

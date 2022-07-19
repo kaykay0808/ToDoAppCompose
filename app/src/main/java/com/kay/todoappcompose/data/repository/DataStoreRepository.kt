@@ -1,6 +1,7 @@
 package com.kay.todoappcompose.data.repository
 
 import android.content.Context
+import androidx.compose.runtime.MutableState
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -33,6 +34,7 @@ class DataStoreRepository @Inject constructor(
     private val dataStore = context.dataStore
 
     // function for saving or persisting that sort state
+
     suspend fun persistSortState(priority: Priority) {
         dataStore.edit { preference ->
             preference[PreferenceKeys.sortKey] = priority.name

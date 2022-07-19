@@ -63,7 +63,7 @@ fun ListTopBar(
                     // switch the searchAppBarState value to open when search icon is clicked.
                     sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
                 },
-                onSortClicked = {},
+                onSortClicked = { sharedViewModel.persistSortState(it) },
                 onDeleteAllConfirmed = { sharedViewModel.action.value = Action.DELETE_ALL }
             )
         }
@@ -252,7 +252,7 @@ fun SearchAppBar(
 ) {
     // Set the default state
     var trailingIconState by remember {
-        mutableStateOf(TrailingIconState.READY_TO_DELETE)
+        mutableStateOf(TrailingIconState.READY_TO_CLOSE) /* Changed to READY_TO_CLOSE */
     }
 
     Surface(
