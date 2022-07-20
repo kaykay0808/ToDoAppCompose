@@ -21,6 +21,10 @@ val HighPriorityColor = Color(0xFFFF4646)
 val NonePriorityColor = MediumGray
 
 // Declare extension properties
+val Colors.splashScreenBackground: Color
+    @Composable
+    get() = if (isLight) Purple700 else Color.Black
+
 val Colors.taskItemTextColor: Color
     @Composable
     get() = if (isLight) DarkGray else LightGray

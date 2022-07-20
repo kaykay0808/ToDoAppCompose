@@ -11,6 +11,8 @@ val SMALL_PADDING = 6.dp
 /** TASK TOP BAR SECTION */
 // Default height for top app bar.
 val TOP_APP_BAR_HEIGHT = 56.dp
+// Splash screen
+val LOGO_SIZE = 150.dp
 // Default height for priority drop down menu
 val PRIORITY_DROP_DOWN_HEIGHT = 60.dp
 val PRIORITY_INDICATOR_SIZE = 16.dp
