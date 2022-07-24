@@ -10,7 +10,7 @@ import com.kay.todoappcompose.util.Constants.SPLASH_SCREEN
 class Screens(navController: NavHostController) {
 
     // Defined variable screens below that represent one screen
-    /** SPLASH TO LIST-SCREEN */
+    /** SPLASH-SCREEN TO LIST-SCREEN */
     val splashRoute: () -> Unit = {
         navController.navigate(route = "list/${Action.NO_ACTION.name}") {
             popUpTo(SPLASH_SCREEN) { inclusive = true }

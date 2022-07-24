@@ -1,8 +1,6 @@
 package com.kay.todoappcompose.ui.screens.list
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -107,8 +105,7 @@ fun HandleListContent(
     }
 }
 
-
-//@OptIn(ExperimentalMaterialApi::class)
+// @OptIn(ExperimentalMaterialApi::class)
 @ExperimentalMaterialApi
 @Composable
 fun DisplayTask(
@@ -278,4 +275,3 @@ private fun RedBackgroundPreview() {
         RedBackground(degrees = 0f)
     }
 }
-

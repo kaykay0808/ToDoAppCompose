@@ -34,19 +34,18 @@ fun SplashScreen(
     var startingAnimation by remember { mutableStateOf(false) }
     val offsetState by animateDpAsState(
         targetValue = if (startingAnimation) 0.dp else 100.dp,
-        animationSpec = tween (
+        animationSpec = tween(
             durationMillis = 1000
-                )
+        )
     )
     val alphaState by animateFloatAsState(
-        targetValue = if(startingAnimation) 1f else 0f,
+        targetValue = if (startingAnimation) 1f else 0f,
         animationSpec = tween(
             durationMillis = 1000
         )
     )
 
-
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         startingAnimation = true
         delay(SPLASH_SCREEN_DELAY)
         navigateToListScreen()
@@ -70,7 +69,7 @@ fun SplashScreen(
 
 @Composable
 fun getLogo(): Int {
-    return if(isSystemInDarkTheme()) {
+    return if (isSystemInDarkTheme()) {
         R.drawable.ic_logo_dark
     } else {
         R.drawable.ic_logo_light

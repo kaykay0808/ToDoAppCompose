@@ -1,11 +1,14 @@
 package com.kay.todoappcompose.navigation.destinations
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 import androidx.navigation.navArgument
 import com.kay.todoappcompose.ui.screens.task.TaskScreen
 import com.kay.todoappcompose.ui.viewmodels.SharedViewModel
@@ -15,6 +18,7 @@ import com.kay.todoappcompose.util.Constants.TASK_ARGUMENT_KEY
 import com.kay.todoappcompose.util.Constants.TASK_SCREEN
 
 // TASK SCREEN DESTINATION
+@ExperimentalAnimationApi
 fun NavGraphBuilder.taskComposable(
     sharedViewModel: SharedViewModel,
     navigateToListScreen: (Action) -> Unit
@@ -26,7 +30,15 @@ fun NavGraphBuilder.taskComposable(
             navArgument(Constants.TASK_ARGUMENT_KEY) {
                 type = NavType.IntType
             }
-        )
+        ),
+        enterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { fullWidth ->
+                    -fullWidth
+                },
+                animationSpec = tween(durationMillis = 300)
+            )
+        }
     ) /* Whenever we navigate from our listScreen to our taskScreen,
     then we are going to receive a taskId, and that ID will be used to request the specific task from our database.
     If the ID is not -1 (which is the case when we click the floating button)

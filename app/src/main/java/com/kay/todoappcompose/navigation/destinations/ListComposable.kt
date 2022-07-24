@@ -1,10 +1,11 @@
 package com.kay.todoappcompose.navigation.destinations
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 import androidx.navigation.navArgument
 import com.kay.todoappcompose.ui.screens.list.ListScreen
 import com.kay.todoappcompose.ui.viewmodels.SharedViewModel
@@ -17,6 +18,7 @@ import com.kay.todoappcompose.util.toAction
 // ListComposable Destination
 
 @ExperimentalMaterialApi
+@ExperimentalAnimationApi
 fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,
     sharedViewModel: SharedViewModel
@@ -29,7 +31,7 @@ fun NavGraphBuilder.listComposable(
                 // specify the argument type which will be a string
                 type = NavType.StringType
             }
-        )
+        ),
     ) { navBackStackEntry ->
         // This argument will be received from our TaskComposable in a format of a string
         // We want to convert the data string back to the original type which is action.
