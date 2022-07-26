@@ -1,7 +1,7 @@
 package com.kay.todoappcompose.util
 
 // Some action that will represent some of the actions which we are going to trigger with our database table
-// So we are going to use this Enum class to actually pass the action from our task composable
+// So we are going to use this Enum class to actually pass the action from our task composable to our listScreen
 enum class Action {
     ADD,
     UPDATE,

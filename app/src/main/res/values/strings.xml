@@ -11,7 +11,7 @@
     <string name="sort_action">Sort Tasks</string>
     <string name="search_placeholder">Search</string>
     <!-- Top bar Title -->
-    <string name="list_screen_title">List Of Task</string>
+    <string name="list_screen_title">List Of Tasks</string>
     <string name="new_task_screen_title">Add New Task</string>
 
     <!-- Icon description -->

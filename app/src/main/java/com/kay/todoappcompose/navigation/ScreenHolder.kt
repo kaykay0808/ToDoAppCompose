@@ -7,7 +7,7 @@ import com.kay.todoappcompose.util.Constants.SPLASH_SCREEN
 
 // Class which handle our navigation
 // This screen class should contains navController
-class Screens(navController: NavHostController) {
+class ScreenHolder(navController: NavHostController) {
 
     // Defined variable screens below that represent one screen
     /** SPLASH-SCREEN TO LIST-SCREEN */
@@ -18,7 +18,7 @@ class Screens(navController: NavHostController) {
     }
 
     // we just want to pass the specific Id task and not the whole task object
-    /** LIST-SCREEN TO TASK-SCREEN */
+    /** LIST-SCREEN TO TASK-SCREEN  */
     val listRoute: (Int) -> Unit = { taskId ->
         navController.navigate("task/$taskId") // The navController will navigate us to our taskComposable with the specify ID
     }
@@ -32,7 +32,7 @@ class Screens(navController: NavHostController) {
             popUpTo(LIST_SCREEN) {
                 inclusive =
                     true // <- remove the task from the back stack when we navigate from task to list
-            } /*Whenever we navigate from our task  to our list, we pop up to our list screen */
+            } /*Whenever we navigate from our task  to our list. TaskScreen will be removed from back stack so we can´t move back to task screen*/
         }
     }
 }

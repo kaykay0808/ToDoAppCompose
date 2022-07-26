@@ -25,7 +25,7 @@ fun SetupNavigation(
     // save our backstack
     // The variable to keep track of all our composable
     val screen = remember(navController) {
-        Screens(navController = navController)
+        ScreenHolder(navController = navController)
     }
 
     // Calling the navHost which define the navigation graph.
