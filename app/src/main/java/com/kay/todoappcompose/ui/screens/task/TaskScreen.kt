@@ -2,9 +2,11 @@ package com.kay.todoappcompose.ui.screens.task
 
 import android.content.Context
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.kay.todoappcompose.data.models.Priority
@@ -24,6 +26,8 @@ fun TaskScreen(
     val descriptionObserved: String by sharedViewModel.description
     val priorityObserved: Priority by sharedViewModel.priority
     val context = LocalContext.current
+
+    BackHandler(onBackPressed = { navigateToListScreens(Action.NO_ACTION) })
 
     Scaffold(
         topBar = {
@@ -64,5 +68,29 @@ fun displayToast(context: Context) {
 }
 
 @Composable
+fun BackHandler(
+    backDispatcher: OnBackPressedDispatcher? =
+        LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher,
+    onBackPressed: () -> Unit
+) {
+    val currentOnBackPressed by rememberUpdatedState(newValue = onBackPressed)
+
+    val backCallBack = remember {
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                currentOnBackPressed()
+            }
+        }
+    }
+
+    DisposableEffect(key1 = backDispatcher) {
+        backDispatcher?.addCallback(backCallBack)
+
+        onDispose { backCallBack.remove() }
+    }
+}
+
+@Composable
 @Preview
-fun TaskScreenPreview() {}
+fun TaskScreenPreview() {
+}
