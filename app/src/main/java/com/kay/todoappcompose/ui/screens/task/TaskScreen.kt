@@ -67,6 +67,7 @@ fun displayToast(context: Context) {
     ).show()
 }
 
+// Handling the back handler button.
 @Composable
 fun BackHandler(
     backDispatcher: OnBackPressedDispatcher? =

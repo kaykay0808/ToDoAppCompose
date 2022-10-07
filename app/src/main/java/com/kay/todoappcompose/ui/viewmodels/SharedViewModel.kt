@@ -34,7 +34,7 @@ class SharedViewModel @Inject constructor(
     val description: MutableState<String> = mutableStateOf("")
     val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
 
-    // Define states which we are to observe from our list
+    // Define states which we are going to observe from our list
     val searchAppBarState: MutableState<SearchAppBarState> =
         // Set the MutableState<> to a default value below
         mutableStateOf(SearchAppBarState.CLOSED)
